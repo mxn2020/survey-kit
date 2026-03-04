@@ -1,5 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Download, Users } from "lucide-react";
+import { Button, Card } from "@geenius-ui/react-css";
 
 const data = [
     { name: "1 - Poor", value: 12 }, { name: "2 - Fair", value: 18 },
@@ -14,11 +15,11 @@ export default function ResultsPage() {
                 <h1 style={{ fontSize: "var(--font-size-2xl)", fontWeight: 700, marginBottom: 4 }}>Results: Customer Satisfaction (CSAT)</h1>
                 <p style={{ color: "var(--color-text-secondary)", fontSize: "13px", display: "flex", alignItems: "center", gap: 6 }}><Users size={14} /> 328 Total Responses • Updated just now</p>
             </div>
-            <button className="btn"><Download size={16} /> Export CSV</button>
+            <Button variant="outline" icon={<Download size={16} />}>Export CSV</Button>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
-            <div className="card" style={{ padding: "var(--space-5)" }}>
+            <Card padding="lg">
                 <h2 style={{ fontSize: "16px", fontWeight: 600, marginBottom: "var(--space-4)" }}>Q1: How satisfied are you with our service?</h2>
                 <div style={{ display: "flex", alignItems: "center", gap: "var(--space-4)", marginBottom: "var(--space-6)" }}>
                     <div style={{ fontSize: "48px", fontWeight: 800, color: "var(--color-accent-primary)", lineHeight: 1 }}>4.2</div>
@@ -33,9 +34,9 @@ export default function ResultsPage() {
                         <Bar dataKey="value" fill="var(--color-accent-primary)" radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
-            </div>
+            </Card>
 
-            <div className="card" style={{ padding: "var(--space-5)" }}>
+            <Card padding="lg">
                 <h2 style={{ fontSize: "16px", fontWeight: 600, marginBottom: "var(--space-4)" }}>Q2: What could we improve?</h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
                     {[
@@ -48,9 +49,9 @@ export default function ResultsPage() {
                             {text}
                         </div>
                     ))}
-                    <button className="btn-ghost" style={{ alignSelf: "center", marginTop: "var(--space-2)", color: "var(--color-accent-primary)", fontWeight: 600, fontSize: "14px", border: "none", background: "none" }}>View all 145 responses</button>
+                    <Button variant="ghost" className="view-all-btn">View all 145 responses</Button>
                 </div>
-            </div>
+            </Card>
         </div>
     </div>);
 }

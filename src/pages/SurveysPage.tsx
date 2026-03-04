@@ -1,4 +1,5 @@
 import { Users, Clock, MoreHorizontal } from "lucide-react";
+import { Button, Card, Badge, Select, SelectItem } from "@geenius-ui/react-css";
 
 export default function SurveysPage() {
     const surveys = [
@@ -11,31 +12,35 @@ export default function SurveysPage() {
     return (<div style={{ padding: "var(--space-6)", maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-6)" }}>
             <h1 style={{ fontSize: "var(--font-size-2xl)", fontWeight: 700 }}>My Surveys</h1>
-            <div style={{ display: "flex", gap: "var(--space-2)" }}>
-                <select className="input" style={{ width: "auto", padding: "8px 32px 8px 12px" }}><option>All Surveys</option><option>Active</option><option>Draft</option><option>Closed</option></select>
-            </div>
+            <Select defaultValue="all">
+                <SelectItem value="all">All Surveys</SelectItem>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="draft">Draft</SelectItem>
+                <SelectItem value="closed">Closed</SelectItem>
+            </Select>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
             {surveys.map(s => (
-                <div key={s.id} className="card" style={{ padding: "var(--space-5)", display: "flex", alignItems: "center", justifyContent: "space-between", transition: "transform 0.2s, box-shadow 0.2s" }} onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"} onMouseLeave={e => e.currentTarget.style.transform = "none"}>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <Card key={s.id} padding="lg" hover>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
+                                <h2 style={{ fontSize: "16px", fontWeight: 600 }}>{s.title}</h2>
+                                <Badge variant={s.status === "Active" ? "success" : s.status === "Draft" ? "warning" : "secondary"}>{s.status}</Badge>
+                            </div>
+                            <div style={{ display: "flex", alignItems: "center", gap: "var(--space-4)", color: "var(--color-text-secondary)", fontSize: "13px" }}>
+                                <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Users size={14} /> {s.responses} Responses</span>
+                                <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Clock size={14} /> {s.created}</span>
+                            </div>
+                        </div>
                         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
-                            <h2 style={{ fontSize: "16px", fontWeight: 600 }}>{s.title}</h2>
-                            <span className={`badge badge-${s.status.toLowerCase()}`}>{s.status}</span>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-4)", color: "var(--color-text-secondary)", fontSize: "13px" }}>
-                            <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Users size={14} /> {s.responses} Responses</span>
-                            <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Clock size={14} /> {s.created}</span>
+                            <Button variant="ghost">Edit</Button>
+                            <Button variant="primary" size="sm">View Results</Button>
+                            <Button variant="ghost" size="sm" icon={<MoreHorizontal size={18} />} />
                         </div>
                     </div>
-
-                    <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
-                        <button className="btn btn-ghost">Edit</button>
-                        <button className="btn btn-primary btn-sm">View Results</button>
-                        <button className="btn-icon"><MoreHorizontal size={18} /></button>
-                    </div>
-                </div>
+                </Card>
             ))}
         </div>
     </div>);

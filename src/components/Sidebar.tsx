@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { ListTodo, PenTool, BarChart3, Settings, HelpCircle } from "lucide-react";
+import { Button, Avatar } from "@geenius-ui/react-css";
 import ThemeToggle from "./ThemeToggle";
+
 export default function Sidebar() {
     const loc = useLocation();
     const links = [
@@ -18,7 +20,7 @@ export default function Sidebar() {
         </div>
 
         <div style={{ padding: "var(--space-4)" }}>
-            <button className="btn btn-primary" style={{ width: "100%" }}>+ New Survey</button>
+            <Button variant="primary" style={{ width: "100%" }}>+ New Survey</Button>
         </div>
 
         <nav style={{ padding: "0 var(--space-3)", flex: 1, display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
@@ -27,7 +29,7 @@ export default function Sidebar() {
 
         <div style={{ padding: "var(--space-4)", borderTop: "1px solid var(--color-border)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", color: "var(--color-text-secondary)", fontWeight: 500 }}>
-                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "var(--color-bg-tertiary)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", fontWeight: 700 }}>MN</div>
+                <Avatar fallback="MN" size="sm" />
                 Workspace
             </div>
             <ThemeToggle />
